@@ -1,4 +1,3 @@
-import { Link } from 'remix';
 import Jumbotron from '../components/Jumbotron';
 
 export default function Index() {
