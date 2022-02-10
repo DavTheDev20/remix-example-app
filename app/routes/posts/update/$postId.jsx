@@ -41,7 +41,7 @@ export default function UpdatePost() {
         style={{
           margin: '2% auto',
           textAlign: 'center',
-          border: '2px solid black',
+          border: '2px solid #90E0EF',
           width: '50%',
           padding: '1%',
         }}
