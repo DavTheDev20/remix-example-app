@@ -16,6 +16,7 @@ export async function action({ request }) {
   const postUpdate = {
     title: form.get('title'),
     content: form.get('content'),
+    dateUpdated: new Date(),
   };
   await updatePost(postId, postUpdate);
   return redirect('/posts');

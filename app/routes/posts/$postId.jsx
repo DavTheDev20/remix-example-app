@@ -1,6 +1,5 @@
 import { redirect, useLoaderData, Link } from 'remix';
 import Jumbotron from '../../components/Jumbotron';
-// import data from '../../db/posts.json';
 import { getSinglePost, deletePost } from '~/postsServer';
 
 export async function loader({ params }) {
@@ -41,6 +40,10 @@ export default function Post() {
             month: 'long',
             day: 'numeric',
           })}
+          {` at ${new Date(post.dateCreated).toLocaleTimeString('en-US', {
+            hour: 'numeric',
+            minute: '2-digit',
+          })}`}
         </small>
         <p>{post.content}</p>
         <form method="POST">

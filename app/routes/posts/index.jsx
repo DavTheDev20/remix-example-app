@@ -1,5 +1,4 @@
 import Jumbotron from '../../components/Jumbotron';
-// import data from '../../db/posts.json';
 import { getPosts } from '../../postsServer';
 import { Link, useLoaderData } from 'remix';
 
@@ -41,6 +40,28 @@ export default function Posts() {
                     : post.content.slice(0, 75) + '... '}
                   <Link to={`/posts/${post._id}`}>Read More</Link>
                 </p>
+                {post.dateUpdated ? (
+                  <small
+                    style={{
+                      marginTop: '10px',
+                      display: 'block',
+                      color: 'hsla(190, 77%, 88%, 0.69)',
+                    }}
+                  >
+                    {'Updated on: ' +
+                      new Date(post.dateUpdated).toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      }) +
+                      ' at ' +
+                      new Date(post.dateUpdated).toLocaleTimeString('en-US', {
+                        hour: 'numeric',
+                        minute: '2-digit',
+                      })}
+                  </small>
+                ) : null}
               </div>
             );
           })
