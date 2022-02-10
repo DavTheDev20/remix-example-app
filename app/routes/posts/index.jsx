@@ -22,7 +22,7 @@ export default function Posts() {
         <h1>Posts</h1>
       </Jumbotron>
       <div className="posts" style={{ margin: '1% auto', width: '75%' }}>
-        {posts ? (
+        {posts.length > 0 ? (
           posts.map((post) => {
             return (
               <div

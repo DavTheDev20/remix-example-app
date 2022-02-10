@@ -1,6 +1,6 @@
 import Jumbotron from '../components/Jumbotron';
 import { createPost } from '~/postsServer';
-import { redirect, Scripts, useCatch, useActionData } from 'remix';
+import { redirect, useActionData } from 'remix';
 
 export async function action({ request }) {
   const form = await request.formData();
