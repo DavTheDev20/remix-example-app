@@ -1,7 +1,15 @@
 import mongoose from 'mongoose';
 import Post from './models/Post';
 
-mongoose.connect('mongodb://localhost:27017/remix-example-app-DB', (err) => {
+const MONGODB_URI = process.env.MONGODB_URI;
+
+if (!MONGODB_URI) {
+  throw new Error(
+    'No MONGODB_URI specified in .env, please enter one to access database.'
+  );
+}
+
+mongoose.connect(MONGODB_URI, (err) => {
   if (err) {
     console.log(err);
     throw new Error('Error connecting to database.');
