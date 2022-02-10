@@ -1,6 +1,6 @@
 import Jumbotron from '~/components/Jumbotron';
 import { getSinglePost, updatePost } from '~/postsServer';
-import { redirect, useLoaderData } from 'remix';
+import { redirect, useLoaderData, useActionData } from 'remix';
 
 export async function loader({ params }) {
   const { postId } = params;
@@ -13,11 +13,15 @@ export async function loader({ params }) {
 export async function action({ request }) {
   const form = await request.formData();
   const postId = form.get('postId');
+  const post = await getSinglePost(postId);
   const postUpdate = {
     title: form.get('title'),
     content: form.get('content'),
     dateUpdated: new Date(),
   };
+  if (postUpdate.title == post.title && postUpdate.content == post.content) {
+    return 'No update made';
+  }
   await updatePost(postId, postUpdate);
   return redirect('/posts');
 }
@@ -32,6 +36,7 @@ export default function UpdatePost() {
   };
 
   const post = useLoaderData();
+  const message = useActionData();
 
   return (
     <div>
@@ -70,6 +75,18 @@ export default function UpdatePost() {
             defaultValue={post.content}
           ></textarea>
           <br />
+          {message ? (
+            <small
+              style={{
+                color: 'red',
+                display: 'block',
+                marginBottom: '10px',
+                fontWeight: 'bold',
+              }}
+            >
+              {message}
+            </small>
+          ) : null}
           <button
             style={{
               padding: '1.5%',
